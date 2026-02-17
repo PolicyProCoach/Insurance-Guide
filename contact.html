@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us · Pallavi Varshney</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ─── TOKENS ─────────────────────────────────────────────────────────────── */
+:root {
+  --forest:   #0d1f3c;
+  --forest-m: #162d5a;
+  --forest-l: #1e3d7a;
+  --sage:     #4a7fbd;
+  --gold:     #c8a84b;
+  --gold-l:   #e6c96e;
+  --ivory:    #f4f7fc;
+  --ivory-d:  #e4eaf5;
+  --warm:     #1a1e2e;
+  --muted:    #6a7390;
+  --white:    #ffffff;
+
+  --serif: 'Cormorant Garant', Georgia, serif;
+  --sans:  'Jost', sans-serif;
+  --radius: 16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--ivory);
+  color: var(--warm);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--ivory-d); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ─── ANIMATIONS ─────────────────────────────────────────────────────────── */
+@keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+@keyframes fadeUp   { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:translateY(0); } }
+
+/* ─── NAV ─────────────────────────────────────────────────────────────────── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(13,31,60,.96);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(200,168,75,.2);
+  animation: fadeIn .6s ease both;
+}
+.nav-brand {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold);
+  letter-spacing: .5px;
+  text-decoration: none;
+}
+.nav-brand span { color: rgba(255,255,255,.5); font-weight: 400; font-style: italic; font-size:14px; margin-left:6px; }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.nav-send-msg {
+  border: 1.5px solid rgba(200,168,75,.55);
+  color: var(--gold);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 9px 22px; border-radius: 40px;
+  text-decoration: none; transition: all .22s; background: transparent;
+}
+.nav-send-msg:hover { background: rgba(200,168,75,.12); border-color: var(--gold); transform: translateY(-1px); }
+.nav-cta {
+  background: var(--gold); color: var(--forest);
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 1.2px; text-transform: uppercase;
+  padding: 9px 22px; border-radius: 40px;
+  text-decoration: none; transition: all .22s;
+}
+.nav-cta:hover { background: var(--gold-l); transform: translateY(-1px); }
+
+/* ─── PAGE LAYOUT ─────────────────────────────────────────────────────────── */
+.page-wrapper {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 76px;
+}
+
+/* ─── LEFT PANEL ──────────────────────────────────────────────────────────── */
+.contact-left {
+  background: var(--forest);
+  padding: 80px 64px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.contact-left::before {
+  content: '';
+  position: absolute; top:-80px; right:-80px;
+  width: 380px; height: 380px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(200,168,75,.1), transparent 70%);
+  pointer-events: none;
+}
+.contact-left::after {
+  content: '';
+  position: absolute; bottom:-60px; left:-60px;
+  width: 300px; height: 300px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(74,127,189,.1), transparent 70%);
+  pointer-events: none;
+}
+.contact-eyebrow {
+  display: inline-flex; align-items:center; gap:10px;
+  font-size: 11px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+  animation: fadeUp .7s .2s both;
+}
+.contact-eyebrow::before { content:''; width:32px; height:1.5px; background:var(--gold); }
+.contact-h1 {
+  font-family: var(--serif);
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--white);
+  margin-bottom: 20px;
+  animation: fadeUp .7s .32s both;
+}
+.contact-h1 em { font-style: italic; color: var(--gold); }
+.contact-desc {
+  font-size: 16px; font-weight: 300; line-height: 1.8;
+  color: rgba(255,255,255,.6);
+  margin-bottom: 48px;
+  animation: fadeUp .7s .44s both;
+}
+
+.info-items { display:flex; flex-direction:column; gap:24px; animation: fadeUp .7s .56s both; }
+.info-item { display:flex; align-items:flex-start; gap:16px; }
+.info-icon {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(200,168,75,.12);
+  border: 1px solid rgba(200,168,75,.25);
+  display: flex; align-items:center; justify-content:center;
+  font-size: 20px;
+}
+.info-text strong {
+  display: block;
+  font-size: 12px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 4px;
+}
+.info-text span {
+  font-size: 14.5px; color: rgba(255,255,255,.65);
+}
+
+.contact-divider {
+  height: 1px;
+  background: rgba(255,255,255,.1);
+  margin: 36px 0;
+  animation: fadeUp .7s .64s both;
+}
+.trust-row {
+  display: flex; gap: 20px; flex-wrap:wrap;
+  animation: fadeUp .7s .72s both;
+}
+.trust-badge {
+  display: flex; align-items:center; gap:7px;
+  font-size: 12px; color: rgba(255,255,255,.5);
+}
+.trust-badge::before { content:'✓'; color:var(--gold); font-weight:700; }
+
+/* ─── RIGHT PANEL (FORM) ──────────────────────────────────────────────────── */
+.contact-right {
+  background: var(--white);
+  padding: 80px 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.form-header {
+  margin-bottom: 40px;
+  animation: fadeUp .7s .25s both;
+}
+.form-header h2 {
+  font-family: var(--serif);
+  font-size: 34px; font-weight: 700;
+  color: var(--forest);
+  margin-bottom: 8px;
+}
+.form-header p { font-size: 15px; color: var(--muted); font-weight: 300; }
+
+.contact-form { display:flex; flex-direction:column; gap:22px; }
+
+.field-group {
+  display: flex; flex-direction: column; gap: 7px;
+  animation: fadeUp .7s both;
+}
+.field-group:nth-child(1) { animation-delay: .3s; }
+.field-group:nth-child(2) { animation-delay: .38s; }
+.field-group:nth-child(3) { animation-delay: .46s; }
+.field-group:nth-child(4) { animation-delay: .54s; }
+
+.field-label {
+  font-size: 11.5px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted);
+}
+.field-label span { color: #c0392b; margin-left:2px; }
+
+.field-input, .field-textarea {
+  width: 100%;
+  font-family: var(--sans);
+  font-size: 15px; font-weight: 400;
+  color: var(--warm);
+  background: var(--ivory);
+  border: 1.5px solid var(--ivory-d);
+  border-radius: 10px;
+  padding: 13px 16px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s, background .2s;
+}
+.field-input:focus, .field-textarea:focus {
+  border-color: var(--sage);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(74,127,189,.1);
+}
+.field-input.error, .field-textarea.error {
+  border-color: #c0392b;
+  box-shadow: 0 0 0 3px rgba(192,57,43,.08);
+}
+.field-textarea { resize: vertical; min-height: 120px; }
+
+.field-error {
+  font-size: 12px; color: #c0392b;
+  display: none;
+}
+.field-error.visible { display: block; }
+
+/* ─── ROW LAYOUT ─────────────────────────────────────────────────────────── */
+.field-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+  animation: fadeUp .7s .3s both;
+}
+
+/* ─── SUBMIT ─────────────────────────────────────────────────────────────── */
+.submit-btn {
+  width: 100%; padding: 16px 32px;
+  background: var(--forest);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  border: none; border-radius: 40px; cursor: pointer;
+  display: flex; align-items:center; justify-content:center; gap:10px;
+  transition: all .25s;
+  animation: fadeUp .7s .62s both;
+  position: relative; overflow: hidden;
+}
+.submit-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(200,168,75,.15), transparent);
+  opacity: 0; transition: opacity .25s;
+}
+.submit-btn:hover { background: var(--forest-l); transform: translateY(-2px); box-shadow: 0 10px 28px rgba(13,31,60,.25); }
+.submit-btn:hover::after { opacity: 1; }
+.submit-btn:disabled { opacity: .65; cursor: not-allowed; transform: none; }
+.submit-btn .arrow { font-size: 18px; transition: transform .2s; }
+.submit-btn:hover .arrow { transform: translateX(4px); }
+
+/* ─── SUCCESS STATE ──────────────────────────────────────────────────────── */
+.success-panel {
+  display: none; flex-direction: column; align-items:center; text-align:center;
+  padding: 60px 20px; gap: 16px;
+  animation: fadeUp .6s both;
+}
+.success-panel.show { display: flex; }
+.success-panel .contact-form { display: none; }
+.success-icon {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: #eaf7ed; border: 2px solid #6cc584;
+  display: flex; align-items:center; justify-content:center;
+  font-size: 32px; color: #2d8a4e;
+  margin-bottom: 8px;
+}
+.success-panel h3 {
+  font-family: var(--serif); font-size: 32px; font-weight: 700; color: var(--forest);
+}
+.success-panel p { font-size: 15px; color: var(--muted); max-width: 360px; line-height: 1.7; }
+.success-back {
+  margin-top: 8px;
+  background: var(--gold); color: var(--forest);
+  font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase;
+  padding: 12px 28px; border-radius: 40px; text-decoration: none;
+  transition: all .22s; border: none; cursor: pointer; font-family: var(--sans);
+}
+.success-back:hover { background: var(--gold-l); transform: translateY(-1px); }
+
+/* ─── RESPONSIVE ─────────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .page-wrapper { grid-template-columns: 1fr; }
+  .contact-left { padding: 60px 32px 48px; }
+  .contact-right { padding: 60px 32px 80px; }
+  .field-row { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .contact-left { padding: 48px 24px 40px; }
+  .contact-right { padding: 48px 24px 64px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">Pallavi Varshney <span>· Defensive Financial Advisor</span></a>
+  <div class="nav-actions">
+    <a href="contact.html" class="nav-send-msg">Send Message</a>
+    <a href="index.html#consultation" class="nav-cta">Book a Free Consultation</a>
+  </div>
+</nav>
+
+<div class="page-wrapper">
+
+  <!-- LEFT INFO PANEL -->
+  <div class="contact-left">
+    <div class="contact-eyebrow">Reach Out</div>
+    <h1 class="contact-h1">Let's Start a <em>Conversation</em></h1>
+    <p class="contact-desc">Have a question about your financial future? I'm here to help — no jargon, no pressure, just honest guidance tailored to you.</p>
+
+    <div class="info-items">
+      <div class="info-item">
+        <div class="info-icon">📧</div>
+        <div class="info-text">
+          <strong>Email</strong>
+          <span>varshney.pallavi@outlook.com</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">📞</div>
+        <div class="info-text">
+          <strong>Phone</strong>
+          <span>+1 (508) 388-2658</span>
+        </div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🕐</div>
+        <div class="info-text">
+          <strong>Response Time</strong>
+          <span>Within 24 hours, guaranteed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-divider"></div>
+
+    <div class="trust-row">
+      <div class="trust-badge">100% Confidential</div>
+      <div class="trust-badge">No Spam Ever</div>
+      <div class="trust-badge">Licensed Advisor</div>
+    </div>
+  </div>
+
+  <!-- RIGHT FORM PANEL -->
+  <div class="contact-right">
+
+    <!-- Form view -->
+    <div id="formView">
+      <div class="form-header">
+        <h2>Send Us a Message</h2>
+        <p>Fill in the details below and we'll get back to you shortly.</p>
+      </div>
+
+      <div class="contact-form">
+        <!-- Name -->
+        <div class="field-group">
+          <label class="field-label" for="c-name">Full Name <span>*</span></label>
+          <input class="field-input" type="text" id="c-name" placeholder="Your full name" autocomplete="name">
+          <span class="field-error" id="err-c-name">Please enter your name.</span>
+        </div>
+
+        <!-- Email -->
+        <div class="field-group">
+          <label class="field-label" for="c-email">Email Address <span>*</span></label>
+          <input class="field-input" type="email" id="c-email" placeholder="you@example.com" autocomplete="email">
+          <span class="field-error" id="err-c-email">Please enter a valid email address.</span>
+        </div>
+
+        <!-- Phone -->
+        <div class="field-group">
+          <label class="field-label" for="c-phone">Phone Number</label>
+          <input class="field-input" type="tel" id="c-phone" placeholder="+1 (555) 000-0000" autocomplete="tel" maxlength="17" inputmode="numeric">
+          <span class="field-error" id="err-c-phone">Please enter a valid phone number.</span>
+        </div>
+
+        <!-- Message -->
+        <div class="field-group">
+          <label class="field-label" for="c-message">Message <span>*</span></label>
+          <textarea class="field-textarea" id="c-message" placeholder="Tell me how I can help you…"></textarea>
+          <span class="field-error" id="err-c-message">Please enter your message.</span>
+        </div>
+
+        <!-- Submit -->
+        <button class="submit-btn" id="submitBtn" onclick="submitContactForm()">
+          <span>Submit Message</span>
+          <span class="arrow">→</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Success view -->
+    <div class="success-panel" id="successPanel">
+      <div class="success-icon">✓</div>
+      <h3>Message Sent!</h3>
+      <p>Thanks, <strong id="successName"></strong>! I'll personally reach out within 24 hours — no bots, just your advisor.</p>
+      <button class="success-back" onclick="window.location.href='index.html'">Back to Home</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Hidden Google Form iframe fallback -->
+<iframe id="gf-iframe" name="gf-iframe" style="display:none;" aria-hidden="true"></iframe>
+<form
+  id="gf-hidden-form"
+  method="POST"
+  action="https://docs.google.com/forms/d/e/1FAIpQLSegONAViP6_dtffKpfWzZgqsbg2Bx1xQE0Q_lWgJRA9q4zOGA/formResponse"
+  target="gf-iframe"
+  style="display:none;"
+>
+  <input type="hidden" id="gf-name"    name="entry.990262073"  value="">
+  <input type="hidden" id="gf-email"   name="entry.38701164"   value="">
+  <input type="hidden" id="gf-phone"   name="entry.824881174"  value="">
+  <input type="hidden" id="gf-message" name="entry.1399050304" value="">
+</form>
+
+<script>
+// ─── Google Form entry IDs (from pre-fill URL) ─────────────────────────────
+const GF_ACTION     = 'https://docs.google.com/forms/d/e/1FAIpQLSegONAViP6_dtffKpfWzZgqsbg2Bx1xQE0Q_lWgJRA9q4zOGA/formResponse';
+const ENTRY_NAME    = 'entry.990262073';
+const ENTRY_EMAIL   = 'entry.38701164';
+const ENTRY_PHONE   = 'entry.824881174';
+const ENTRY_MESSAGE = 'entry.1399050304';
+
+// ─── Validation helpers ────────────────────────────────────────────────────
+function markError(inputId, errId, show) {
+  const inp = document.getElementById(inputId);
+  const err = document.getElementById(errId);
+  if (show) { inp.classList.add('error'); err.classList.add('visible'); }
+  else       { inp.classList.remove('error'); err.classList.remove('visible'); }
+}
+
+// ─── US Phone auto-formatter (+1 (XXX) XXX-XXXX) ──────────────────────────
+function formatUSPhone(e) {
+  const input  = e.target;
+  let digits   = input.value.replace(/\D/g, '');
+  if (digits.startsWith('1') && digits.length > 1) digits = digits.slice(1);
+  if (digits.length > 10) digits = digits.slice(0, 10);
+  let fmt = '';
+  if      (digits.length === 0)  fmt = '';
+  else if (digits.length <= 3)   fmt = '+1 (' + digits;
+  else if (digits.length <= 6)   fmt = '+1 (' + digits.slice(0,3) + ') ' + digits.slice(3);
+  else                           fmt = '+1 (' + digits.slice(0,3) + ') ' + digits.slice(3,6) + '-' + digits.slice(6);
+  input.value = fmt;
+  markError('c-phone', 'err-c-phone', false);
+}
+document.getElementById('c-phone').addEventListener('input', formatUSPhone);
+
+// Live clear errors on input
+['c-name','c-email','c-message'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => markError(id, 'err-' + id, false));
+});
+
+// ─── Post to Google Form via hidden iframe (most reliable cross-origin method)
+function submitToGoogleForm(name, email, phone, message) {
+  // Strip formatting from phone before sending
+  let rawPhone = phone.replace(/\D/g, '');
+  if (rawPhone.startsWith('1') && rawPhone.length === 11) rawPhone = rawPhone.slice(1);
+
+  // Populate hidden form fields
+  document.getElementById('gf-name').value    = name;
+  document.getElementById('gf-email').value   = email;
+  document.getElementById('gf-phone').value   = rawPhone;
+  document.getElementById('gf-message').value = message;
+
+  // Submit into the hidden iframe — this is the only reliable way to POST
+  // to Google Forms cross-origin without CORS errors
+  document.getElementById('gf-hidden-form').submit();
+}
+
+// ─── Main submit handler ───────────────────────────────────────────────────
+function submitContactForm() {
+  const name    = document.getElementById('c-name').value.trim();
+  const email   = document.getElementById('c-email').value.trim();
+  const phone   = document.getElementById('c-phone').value.trim();
+  const message = document.getElementById('c-message').value.trim();
+
+  let valid = true;
+  const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (name.length < 2)                                   { markError('c-name',    'err-c-name',    true); valid = false; }
+  if (!emailRx.test(email))                              { markError('c-email',   'err-c-email',   true); valid = false; }
+  if (phone) {
+    let phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.startsWith('1') && phoneDigits.length === 11) phoneDigits = phoneDigits.slice(1);
+    if (phoneDigits.length !== 10) { markError('c-phone', 'err-c-phone', true); valid = false; }
+  }
+  if (message.length < 5)                                { markError('c-message', 'err-c-message', true); valid = false; }
+
+  if (!valid) return;
+
+  // Disable button to prevent double-submit
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.querySelector('span:first-child').textContent = 'Sending…';
+
+  // Fire the Google Form submission
+  submitToGoogleForm(name, email, phone, message);
+
+  // Show success screen after short delay (allows iframe submit to fire)
+  setTimeout(() => {
+    document.getElementById('successName').textContent = name.split(' ')[0];
+    document.getElementById('formView').style.display  = 'none';
+    document.getElementById('successPanel').classList.add('show');
+  }, 700);
+}
+</script>
+
+</body>
+</html>
